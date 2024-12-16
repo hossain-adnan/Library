@@ -1,2 +1,3 @@
 # Library
-Skills used: Javascript, Object Construction 
+
+Skills used: Javascript, Object Construction
