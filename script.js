@@ -34,16 +34,25 @@ function displayBooks() {
         const author = document.createElement('p');
         const pageNumber = document.createElement('p');
         const statusBtn = document.createElement('button');
+
+        bookCard.classList.add('bookCard');
+        bookTitle.classList.add('bookTitle');
+        author.classList.add('author');
+        pageNumber.classList.add('pageNumber');
+        statusBtn.classList.add('statusBtn');
+        removeBtn.classList.add('removeBtn');
     
-        //Add contents for DOM elements from the Object Array v1
         bookTitle.textContent = `Title: ${book.title}`;
-        bookCard.appendChild(bookTitle);
         author.textContent = `Author: ${book.author}`;
-        bookCard.appendChild(author);
         pageNumber.textContent = `Pages: ${book.pages}`;
+        statusBtn.textContent = book.read; //Need to toggle -in-> future
+
+        bookCard.appendChild(bookTitle);
+        bookCard.appendChild(author);
         bookCard.appendChild(pageNumber);
-        statusBtn.textContent = `${book.read}`; //Need to toggle -> future
         bookCard.appendChild(statusBtn);
+        // bookCard.appendChild(removeBtn);
+
         
         //Add them into the container
         container.appendChild(bookCard);
