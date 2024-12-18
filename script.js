@@ -25,7 +25,6 @@ function displayBooks() {
     const container = document.querySelector('.container');
     container.innerHTML = '';
 
-    //create DOM elements
     myLibrary.forEach(book => {
 
         const bookCard = document.createElement('div');
@@ -53,13 +52,46 @@ function displayBooks() {
         bookCard.appendChild(statusBtn);
         // bookCard.appendChild(removeBtn);
 
-        
         //Add them into the container
         container.appendChild(bookCard);
-
     })
 
 }
 
-displayBooks();
-displayBooks();
+// displayBooks();
+// displayBooks();
+
+// Add books to the library by clicking 'New Book' button and submitting a dialog box
+
+    const addBookBtn = document.querySelector('.addBook'); // New Book Button
+    const bookDialog = document.querySelector('#book_dialog'); 
+    const form = document.querySelector('#bookForm');
+    //Click the button
+    addBookBtn.addEventListener('click', () => {
+        bookDialog.showModal();
+    });
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+    //Collect data
+    const titleData = document.querySelector('#title').value;
+    const authorData = document.querySelector('#author').value;
+    const pageData = document.querySelector('#pages').value;
+    const readData = document.querySelector('#read').checked ? 'read' : 'Not Read';
+
+    addBookToLibrary(titleData, authorData, pageData, readData);
+    
+    bookDialog.close();
+    form.reset();
+
+    displayBooks();
+    })
+
+    const cancelBtn = document.querySelector('#cancelDialog');
+    cancelBtn.addEventListener('click', () => {
+        bookDialog.close();
+        form.reset();
+    })
+
+    
