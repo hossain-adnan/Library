@@ -25,7 +25,7 @@ function displayBooks() {
     const container = document.querySelector('.container');
     container.innerHTML = '';
 
-    myLibrary.forEach(book => {
+    myLibrary.forEach( (book, index) => {
 
         const bookCard = document.createElement('div');
         const bookTitle = document.createElement('p');
@@ -45,12 +45,17 @@ function displayBooks() {
         author.textContent = `Author: ${book.author}`;
         pageNumber.textContent = `Pages: ${book.pages}`;
         statusBtn.textContent = book.read; //Need to toggle -in-> future
+        removeBtn.textContent ='x';
 
         bookCard.appendChild(bookTitle);
         bookCard.appendChild(author);
         bookCard.appendChild(pageNumber);
         bookCard.appendChild(statusBtn);
-        // bookCard.appendChild(removeBtn);
+        bookCard.appendChild(removeBtn);
+
+        //Data-attribute
+        bookCard.dataset.index = index;
+        console.log(`${bookTitle.textContent}: index ${ bookCard.dataset.index}`); //✅
 
         //Add them into the container
         container.appendChild(bookCard);
@@ -61,11 +66,12 @@ function displayBooks() {
 // displayBooks();
 // displayBooks();
 
-// Add books to the library by clicking 'New Book' button and submitting a dialog box
+//'New Book' button and submitting a dialog box
 
     const addBookBtn = document.querySelector('.addBook'); // New Book Button
     const bookDialog = document.querySelector('#book_dialog'); 
     const form = document.querySelector('#bookForm');
+
     //Click the button
     addBookBtn.addEventListener('click', () => {
         bookDialog.showModal();
@@ -74,18 +80,33 @@ function displayBooks() {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         
-    //Collect data
-    const titleData = document.querySelector('#title').value;
-    const authorData = document.querySelector('#author').value;
-    const pageData = document.querySelector('#pages').value;
-    const readData = document.querySelector('#read').checked ? 'read' : 'Not Read';
+        //Collect data
+        const titleData = document.querySelector('#title').value;
+        const authorData = document.querySelector('#author').value;
+        const pageData = document.querySelector('#pages').value;
+        const readData = document.querySelector('#read').checked ? 'read' : 'Not Read';
 
-    addBookToLibrary(titleData, authorData, pageData, readData);
-    
-    bookDialog.close();
-    form.reset();
+        addBookToLibrary(titleData, authorData, pageData, readData);
+        
+        bookDialog.close();
+        form.reset();
 
-    displayBooks();
+        displayBooks();
+
+        //Remove Button
+        const removeBtn = document.querySelectorAll('.removeBtn');
+        console.log(removeBtn);
+
+        removeBtn.forEach(button => {
+            button.addEventListener('click', () => {
+                const bookCard = button.closest('.bookCard');
+                const index = Number(bookCard.dataset.index);
+                myLibrary.splice(index, 1);
+                displayBooks();
+                // console.log(`After remove - ${bookTitle.textContent}: index ${ bookCard.dataset.index}`);
+                console.log(myLibrary);
+            })
+        })
     })
 
     const cancelBtn = document.querySelector('#cancelDialog');
@@ -94,4 +115,9 @@ function displayBooks() {
         form.reset();
     })
 
+
+    //When the button is clicked
+        // get the dataset.index (same as the index in myLibrary array)
+        // remove it from the array using splice
+        //displayBooks();
     
