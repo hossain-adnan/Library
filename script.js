@@ -5,9 +5,6 @@ function Book (title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.info = function () {
-        return (title + ' ' + 'by ' + author + ', ' + pages + ' pages' + ', ' + read)
-    }
 }
 
 function addBookToLibrary(title, author, pages, read) {
@@ -116,8 +113,4 @@ function displayBooks() {
     })
 
 
-    //When the button is clicked
-        // get the dataset.index (same as the index in myLibrary array)
-        // remove it from the array using splice
-        //displayBooks();
-    
+

@@ -76,7 +76,7 @@ form.addEventListener('submit', (e) => {
     const titleData = document.querySelector('#title').value;
     const authorData = document.querySelector('#author').value;
     const pageData = document.querySelector('#pages').value;
-    const readData = document.querySelector('#read').checked ? 'read' : 'Not Read';
+    const readData = document.querySelector('#read').checked ? 'Read' : 'Not Read';
 
     addBookToLibrary(titleData, authorData, pageData, readData);
     
@@ -103,8 +103,28 @@ form.addEventListener('submit', (e) => {
             myLibrary.splice(index, 1);
             displayBooks();
         }
+
+        if (e.target.classList.contains('statusBtn')) {
+            const bookCard = e.target.closest('.bookCard');
+            const index = bookCard.dataset.index;
+
+            myLibrary[index].changeReadStatus();
+            displayBooks();
+        }
     })
         //IF the the target has a class of removeBtn
             // Get the data.index of closest Book Card
             // Remove item of that index from the array
             // Display the updated DOM
+
+// Toggle read status
+    //Set a method to the Book constructor
+            // It changes this.read = read or unread
+            // Update the DOM
+    Book.prototype.changeReadStatus = function () {
+        if (this.read === 'Read') {
+            this.read = 'Not Read';
+        } else {
+            this.read = 'Read'
+        }
+    }
