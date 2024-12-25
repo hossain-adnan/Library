@@ -5,9 +5,6 @@ function Book (title, author, pages, read) {
     this.author = author;
     this.pages = pages;
     this.read = read;
-    this.info = function () {
-        return (title + ' ' + 'by ' + author + ', ' + pages + ' pages' + ', ' + read)
-    }
 }
 
 // Add book as object FUNCTION
@@ -87,6 +84,13 @@ form.addEventListener('submit', (e) => {
     displayBooks();
 })
 
+//Cancel Button 
+const cancelBtn = document.querySelector('#cancelDialog');
+cancelBtn.addEventListener('click', () => {
+    bookDialog.close();
+    form.reset();
+})
+
 
 // 	4. Show a remove btn and when it's clicked ->
 // 	Remove the card from the display & its original object from the array
@@ -128,3 +132,7 @@ form.addEventListener('submit', (e) => {
             this.read = 'Read'
         }
     }
+
+    addBookToLibrary('Personal MBA', 'Josh', 300, 'Not read');
+    addBookToLibrary('Usul As Thalatha', 'Imam Abdul Wahhab', 100, 'Read');
+    displayBooks()
