@@ -40,11 +40,12 @@ function displayBooks() {
         statusBtn.textContent = book.read; 
         removeBtn.textContent ='x';
         // Append to the card
+        bookCard.appendChild(removeBtn);
         bookCard.appendChild(bookTitle);
         bookCard.appendChild(author);
         bookCard.appendChild(pageNumber);
         bookCard.appendChild(statusBtn);
-        bookCard.appendChild(removeBtn);
+
         //Data-attribute
         bookCard.dataset.index = index;
         console.log(`${bookTitle.textContent}: index ${ bookCard.dataset.index}`); //✅
